@@ -1,7 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
-<head><meta charset="UTF-8"><title>Pixline</title><link rel="stylesheet" href="style.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <title>Pixline</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<div id="login"><h2>Iniciar sesión</h2><input id="user" placeholder="Usuario"><input type="password" id="pass" placeholder="Contraseña"><button onclick="login()">Entrar</button><p id="error"></p></div>
-<div id="feed" style="display:none;"><h1>Bienvenida a Pixline 🌐</h1><p><strong>@pixlineoficial ✅</strong></p><h3>Historias</h3><div class="stories">valen.style 👗 | foodwithleo 🍕 | mari_travel 🌍</div><h3>Publicaciones</h3><p>👗 valen.style: Nuevo outfit para el verano</p><p>🍕 foodwithleo: Pizza casera</p><p>✅ pixlineoficial: ¡Bienvenid@s a Pixline!</p></div>
-<script src="script.js"></script></body></html>
+  <header>
+    <h1>Pixline</h1>
+  </header>
+  <section class="stories">
+    <div onclick="viewStory('valen')" class="story"><img src="https://i.pravatar.cc/100?img=1"><p>@valen.style</p></div>
+    <div onclick="viewStory('leo')" class="story"><img src="https://i.pravatar.cc/100?img=2"><p>@leo.food</p></div>
+    <div onclick="viewStory('mari')" class="story"><img src="https://i.pravatar.cc/100?img=3"><p>@mari_travel</p></div>
+    <div onclick="viewStory('sofia')" class="story"><img src="https://i.pravatar.cc/100?img=4"><p>@sofia.makeup</p></div>
+    <div onclick="viewStory('pixline')" class="story"><img src="https://i.pravatar.cc/100?img=5"><p>@pixlineoficial</p></div>
+  </section>
+  <section class="feed">
+    <div class="post">
+      <div class="post-header"><img src="https://i.pravatar.cc/50?img=1"><span>@valen.style</span></div>
+      <img class="post-img" src="https://picsum.photos/400/400?random=101">
+      <div class="post-actions"><span onclick="like(this)">❤️</span> <span onclick="comment(this)">💬</span></div>
+      <div class="post-comments"><p>❤️ 120 Me gusta</p><p><strong>@valen.style:</strong> ¡Listo para el verano!</p></div>
+    </div>
+    <div class="post">
+      <div class="post-header"><img src="https://i.pravatar.cc/50?img=2"><span>@leo.food</span></div>
+      <img class="post-img" src="https://picsum.photos/400/400?random=202">
+      <div class="post-actions"><span onclick="like(this)">❤️</span> <span onclick="comment(this)">💬</span></div>
+      <div class="post-comments"><p>❤️ 256 Me gusta</p><p><strong>@leo.food:</strong> Mi nueva pizza favorita</p></div>
+    </div>
+    <div class="post">
+      <div class="post-header"><img src="https://i.pravatar.cc/50?img=5"><span>@pixlineoficial</span></div>
+      <img class="post-img" src="https://picsum.photos/400/400?random=303">
+      <div class="post-actions"><span onclick="like(this)">❤️</span> <span onclick="comment(this)">💬</span></div>
+      <div class="post-comments"><p>❤️ 500 Me gusta</p><p><strong>@pixlineoficial:</strong> Bienvenid@s a la nueva Pixline!</p></div>
+    </div>
+  </section>
+
+  <div class="story-modal" id="storyModal" onclick="closeStory()">
+    <img id="storyImg" src="">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
