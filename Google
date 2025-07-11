@@ -1,0 +1,11 @@
+SESSION_SECRET=unSecretoLargo123
+
+GOOGLE_CLIENT_ID=xxxxxxxx.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=xxxxxxxx
+FACEBOOK_APP_ID=xxxxxxxx
+FACEBOOK_APP_SECRET=xxxxxxxx
+INSTAGRAM_CLIENT_ID=xxxxxxxx
+INSTAGRAM_CLIENT_SECRET=xxxxxxxx
+TIKTOK_CLIENT_ID=xxxxxxxx
+TIKTOK_CLIENT_SECRET=xxxxxxxx
+BASE_URL=https://tusitio.vercel.app      # ajusta al dominio que Vercel te dé
