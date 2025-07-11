@@ -1,7 +1,14 @@
-function login(){
-  const u=document.getElementById('user').value, p=document.getElementById('pass').value;
-  if(u==='pixlineoficial'&&p==='visual2025⭐'){
-    document.getElementById('login').style.display='none';
-    document.getElementById('feed').style.display='block';
-  } else document.getElementById('error').innerText='Usuario o contraseña incorrectos.';
+function like(el) {
+  el.innerText = el.innerText === '❤️' ? '🖤' : '❤️';
+}
+function comment(el) {
+  alert('¡Función de comentarios próximamente!');
+}
+function viewStory(user) {
+  const img = document.getElementById('storyImg');
+  img.src = 'https://picsum.photos/400/700?random=' + (user==='valen'?11:user==='leo'?22:user==='mari'?33:user==='sofia'?44:55);
+  document.getElementById('storyModal').style.display = 'flex';
+}
+function closeStory() {
+  document.getElementById('storyModal').style.display = 'none';
 }
