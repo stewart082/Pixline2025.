@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pixline – Feed</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <span class="logo">Pixline</span>
+</header>
+
+<section class="stories">
+  <div class="story"><img src="https://i.pravatar.cc/80?img=12"><p>@valen.style</p></div>
+  <div class="story"><img src="https://i.pravatar.cc/80?img=15"><p>@mari_travel</p></div>
+  <div class="story"><img src="https://i.pravatar.cc/80?img=20"><p>@leo.food</p></div>
+</section>
+
+<section class="feed">
+  <article class="post">
+    <div class="post-header"><img src="https://i.pravatar.cc/40?img=12"><span>@valen.style</span></div>
+    <img src="https://picsum.photos/500/500?random=90" class="post-img">
+    <div class="actions">
+      <span onclick="like(this)">♡</span>
+      <span>💬</span>
+    </div>
+    <p class="likes">0 me gusta</p>
+  </article>
+</section>
+
+<script>
+function like(el){
+  const likesEl = el.parentElement.nextElementSibling;
+  let likes = parseInt(likesEl.dataset.count||0,10);
+  likes++;
+  likesEl.dataset.count = likes;
+  likesEl.textContent = likes + ' me gusta';
+  el.textContent = '♥';
+}
+</script>
+</body>
+</html>
