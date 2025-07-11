@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixline – Iniciar sesión</title>
+  <style>
+    body {
+      background: #fafafa;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-box {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      text-align: center;
+      width: 90%;
+      max-width: 320px;
+    }
+    h1 {
+      margin-bottom: 24px;
+      font-size: 28px;
+      color: #0095f6;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #0095f6;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
 
+  <div class="login-box">
+    <h1>Pixline</h1>
+    <input type="text" id="user" placeholder="Usuario" />
+    <input type="password" id="pass" placeholder="Contraseña" />
+    <button onclick="login()">Iniciar sesión</button>
+    <p class="error" id="error">Usuario o contraseña incorrectos.</p>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById('user').value.trim();
+      const pass = document.getElementById('pass').value.trim();
+
+      if (user === "pixlineoficial" && pass === "visual2025⭐") {
+        window.location.href = "feed.html";
+      } else {
+        document.getElementById('error').style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
