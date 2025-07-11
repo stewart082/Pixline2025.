@@ -1,0 +1,8 @@
+pixline/
+├─ public/
+│  ├─ index.html        (pantalla login minimalista)
+│  ├─ feed.html         (feed tras iniciar sesión)
+│  └─ styles.css
+├─ server.js            (Express + Passport)
+├─ package.json
+└─ .env                 (credenciales OAuth)
