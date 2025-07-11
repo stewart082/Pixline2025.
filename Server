@@ -1,0 +1,76 @@
+import express from 'express';
+import session from 'express-session';
+import passport from 'passport';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { Strategy as FacebookStrategy } from 'passport-facebook';
+import InstagramStrategy from 'passport-instagram';
+import TikTokStrategy from 'passport-tiktok-oauth2';
+
+dotenv.config();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const app = express();
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((obj, done) => done(null, obj));
+
+/* ----------  Google ---------- */
+passport.use(new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: `${process.env.BASE_URL}/auth/google/callback`
+}, (accessToken, refreshToken, profile, done) => done(null, profile)));
+
+/* ----------  Facebook ---------- */
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+  callbackURL: `${process.env.BASE_URL}/auth/facebook/callback`,
+  profileFields: ['id', 'displayName', 'photos', 'email']
+}, (accessToken, refreshToken, profile, done) => done(null, profile)));
+
+/* ----------  Instagram ---------- */
+passport.use(new InstagramStrategy({
+  clientID: process.env.INSTAGRAM_CLIENT_ID,
+  clientSecret: process.env.INSTAGRAM_CLIENT_SECRET,
+  callbackURL: `${process.env.BASE_URL}/auth/instagram/callback`
+}, (accessToken, refreshToken, profile, done) => done(null, profile)));
+
+/* ----------  TikTok ---------- */
+passport.use(new TikTokStrategy({
+  clientID: process.env.TIKTOK_CLIENT_ID,
+  clientSecret: process.env.TIKTOK_CLIENT_SECRET,
+  callbackURL: `${process.env.BASE_URL}/auth/tiktok/callback`,
+  scope: ['user.info.basic']
+}, (accessToken, refreshToken, profile, done) => done(null, profile)));
+
+/* ----------  Rutas Auth ---------- */
+const providers = ['google', 'facebook', 'instagram', 'tiktok'];
+providers.forEach(p => {
+  app.get(`/auth/${p}`, passport.authenticate(p, { scope: ['email'] }));
+  app.get(`/auth/${p}/callback`,
+    passport.authenticate(p, { failureRedirect: '/' }),
+    (_req, res) => res.redirect('/feed'));
+});
+
+/* ----------  Rutas Públicas ---------- */
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/feed', ensureAuth, (_req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'feed.html')));
+
+/* ----------  Middleware de seguridad ---------- */
+function ensureAuth(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/');
+}
+
+/* ----------  Inicio ---------- */
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Pixline corriendo en puerto ${PORT}`));
